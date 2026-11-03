@@ -1,0 +1,12 @@
+0452 完整驱动配套包：已联网的 0451 Wi-Fi 驱动 + 0452 内核短文件覆盖修复。
+本包没有安装程序、IPA、启动镜像或 iOS 系统镜像。
+
+libNezhaPeachWifi-0452.a 内含 17 个实际编译对象：16 个 Wi-Fi 对象及已修复的 pandora_files 对象。
+适用当前 Nezha / SM8850 / WCN7860 XNU 移植工程与匹配的编译 ABI。
+集成方式一：使用 objects/ 替换/加入对应对象，包括替换原内核文件列表中的旧 pandora_files.o。
+集成方式二：从原链接列表移除上述同名对象，再以 -force_load libNezhaPeachWifi-0452.a 链接此库。
+两种方式选其一，不要重复链接；旧 pandora_files.o 必须被替换，旧尾部修复才会生效。
+source/ 按 XNU 目标路径排列；project-patches/ 的 0450、0451、0452 以本工程 0449 为基线。
+初始化入口 pandora_wifi_init() 由现有 pandora_adsp.c 调用一次；启动参数 nezha_wifi=1。
+PCIe/RPMh、共享 SMMU、fuxi_gpu_access、固件容器与 IONetworkController 支持沿用现有工程。
+原厂固件不随包分发，沿用手机匹配的本机固件。源码许可见各文件声明及 licenses/。
